@@ -1,0 +1,111 @@
+ @import './variables';
+
+ .hero {
+     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/public/images/embroidery.webp'); // Embroidery background
+     background-size: cover;
+     background-position: center;
+     color: white;
+     padding: 100px 0;
+     text-align: center;
+
+     .heroContent {
+         max-width: 800px;
+         margin: 0 auto;
+         padding: 0 $spacing-lg;
+
+         h1 {
+             font-size: 48px;
+             font-weight: 800;
+             margin-bottom: $spacing-lg;
+             line-height: 1.2;
+         }
+
+         p {
+             font-size: $font-size-lg;
+             margin-bottom: $spacing-xl;
+             opacity: 0.9;
+         }
+
+         .buttons {
+             display: flex;
+             gap: $spacing-md;
+             justify-content: center;
+
+             // Overlay specific button tweaks if needed
+             button {
+                 // slightly larger mock overrides
+             }
+         }
+     }
+ }
+
+ .section {
+     padding: 80px 0;
+
+     .container {
+         max-width: $container-max-width;
+         margin: 0 auto;
+         padding: 0 $spacing-lg;
+     }
+
+     .sectionHeader {
+         @include flex-between;
+         margin-bottom: $spacing-xl;
+
+         h2 {
+             font-size: $font-size-2xl;
+             color: $text-primary;
+         }
+
+         a {
+             color: $primary-color;
+             font-weight: 600;
+
+             &:hover {
+                 text-decoration: underline;
+             }
+         }
+     }
+
+     .grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+         gap: $spacing-lg;
+     }
+ }
+
+ .features {
+     background: $background-color;
+     padding: 80px 0;
+
+     .container {
+         max-width: $container-max-width;
+         margin: 0 auto;
+         padding: 0 $spacing-lg;
+         display: grid;
+         grid-template-columns: repeat(3, 1fr);
+         gap: $spacing-xl;
+
+         @media (max-width: 768px) {
+             grid-template-columns: 1fr;
+         }
+     }
+
+     .feature {
+         text-align: center;
+         padding: $spacing-lg;
+         background: white;
+         border-radius: 12px;
+         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+         h3 {
+             color: $primary-color;
+             margin-bottom: $spacing-sm;
+             font-size: $font-size-lg;
+         }
+
+         p {
+             color: $text-secondary;
+         }
+     }
+ }

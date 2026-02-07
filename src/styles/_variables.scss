@@ -1,0 +1,59 @@
+/* Color Palette */
+$primary-color: #E94E77;
+/* Deep Pink/Red */
+$secondary-color: #4A90E2;
+/* Soft Blue */
+$accent-color: #F5A623;
+/* Gold/Orange */
+$background-color: #FDFBF7;
+/* Premium Cream/Ivory */
+$surface-color: #FFFFFF;
+$text-primary: #1F2937;
+$text-secondary: #6B7280;
+$success-color: #10B981;
+$error-color: #EF4444;
+$border-color: #E5E7EB;
+
+/* Typography */
+$font-family: 'Inter', system-ui, -apple-system, sans-serif;
+$font-size-base: 16px;
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-lg: 18px;
+$font-size-xl: 24px;
+$font-size-2xl: 32px;
+
+/* Spacing */
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;
+$container-max-width: 1200px;
+
+/* Mixins */
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin card-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+@mixin button-base {
+  padding: $spacing-sm $spacing-md;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}

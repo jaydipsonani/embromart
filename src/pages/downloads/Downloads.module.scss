@@ -1,0 +1,61 @@
+ @import '../../styles/variables';
+
+ .container {
+     max-width: 800px;
+     margin: 0 auto;
+     padding: $spacing-2xl $spacing-lg;
+     text-align: center;
+ }
+
+ .successHeader {
+     margin-bottom: $spacing-2xl;
+
+     .icon {
+         font-size: 48px;
+         margin-bottom: $spacing-md;
+     }
+
+     h1 {
+         color: $text-primary;
+         margin-bottom: $spacing-sm;
+     }
+
+     p {
+         color: $text-secondary;
+     }
+ }
+
+ .downloadCard {
+     background: white;
+     border: 1px solid $border-color;
+     border-radius: 12px;
+     padding: $spacing-lg;
+     display: flex;
+     align-items: center;
+     gap: $spacing-lg;
+     text-align: left;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+     img {
+         width: 100px;
+         height: 100px;
+         object-fit: cover;
+         border-radius: 8px;
+         background: #f3f4f6;
+     }
+
+     .info {
+         flex: 1;
+
+         h2 {
+             font-size: $font-size-lg;
+             margin-bottom: $spacing-xs;
+         }
+
+         p {
+             color: $text-secondary;
+             font-size: $font-size-sm;
+             margin-bottom: $spacing-md;
+         }
+     }
+ }

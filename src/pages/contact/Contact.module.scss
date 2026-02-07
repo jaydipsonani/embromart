@@ -1,0 +1,58 @@
+ @import '../../styles/variables';
+
+ .container {
+     max-width: 600px;
+     margin: 0 auto;
+     padding: 80px $spacing-lg;
+     text-align: center;
+
+     h1 {
+         font-size: $font-size-2xl;
+         margin-bottom: $spacing-md;
+         color: $text-primary;
+     }
+
+     .subtitle {
+         color: $text-secondary;
+         margin-bottom: $spacing-xl;
+     }
+
+     .form {
+         text-align: left;
+         display: flex;
+         flex-direction: column;
+         gap: $spacing-lg;
+         background: white;
+         padding: $spacing-xl;
+         border-radius: 12px;
+         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+         border: 1px solid $border-color;
+
+         .group {
+             display: flex;
+             flex-direction: column;
+             gap: $spacing-xs;
+
+             label {
+                 font-weight: 600;
+                 font-size: $font-size-sm;
+                 color: $text-primary;
+             }
+
+             input,
+             textarea {
+                 padding: 10px;
+                 border: 1px solid $border-color;
+                 border-radius: 6px;
+                 font-family: inherit;
+                 transition: border-color 0.2s;
+
+                 &:focus {
+                     outline: none;
+                     border-color: $primary-color;
+                     box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+                 }
+             }
+         }
+     }
+ }

@@ -1,0 +1,107 @@
+@use '../../styles/variables' as *;
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.9); // Fallback
+    background-image: url('https://www.transparenttextures.com/patterns/linen.png'); // Subtle linen texture
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid $border-color;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+    .container {
+        max-width: $container-max-width;
+        margin: 0 auto;
+        padding: $spacing-md $spacing-lg;
+        @include flex-between;
+    }
+
+    .logo {
+        font-size: $font-size-xl;
+        font-weight: 800;
+        color: $primary-color;
+        letter-spacing: -0.5px;
+
+        span {
+            color: $text-primary;
+        }
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+
+    .nav {
+        display: flex;
+        gap: $spacing-xl;
+
+        a {
+            font-weight: 500;
+            color: $text-secondary;
+            transition: color 0.2s ease;
+            font-size: $font-size-sm;
+
+            &:hover,
+            &.active {
+                color: $primary-color;
+            }
+        }
+
+        @media (max-width: 768px) {
+            display: none; // Mobile menu to be implemented if needed
+        }
+    }
+
+    .actions {
+        display: flex;
+        gap: $spacing-md;
+        align-items: center;
+
+        .cart {
+            position: relative;
+            color: $text-primary;
+            cursor: pointer;
+            margin-right: $spacing-sm;
+
+            .badge {
+                position: absolute;
+                top: -8px;
+                right: -8px;
+                background: $primary-color;
+                color: white;
+                font-size: 10px;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                @include flex-center;
+                border: 2px solid $surface-color;
+            }
+        }
+
+        .userMenu {
+            display: flex;
+            align-items: center;
+            gap: $spacing-sm;
+
+            .userName {
+                font-size: $font-size-sm;
+                font-weight: 600;
+                color: $text-primary;
+            }
+
+            .logoutBtn {
+                background: none;
+                border: none;
+                color: $text-secondary;
+                font-size: $font-size-xs;
+                cursor: pointer;
+
+                &:hover {
+                    color: $primary-color;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

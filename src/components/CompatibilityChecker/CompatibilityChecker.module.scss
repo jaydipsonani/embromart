@@ -1,0 +1,70 @@
+ @import '../../styles/variables';
+
+ .checker {
+     background: #F3F4F6;
+     padding: $spacing-md;
+     border-radius: 8px;
+     margin: $spacing-lg 0;
+     border: 1px solid $border-color;
+
+     h3 {
+         font-size: $font-size-base;
+         margin-bottom: $spacing-sm;
+         color: $text-primary;
+     }
+
+     .form {
+         display: flex;
+         gap: $spacing-sm;
+
+         @media (max-width: 600px) {
+             flex-direction: column;
+         }
+
+         select {
+             flex: 1;
+             padding: 8px 12px;
+             border: 1px solid $border-color;
+             border-radius: 6px;
+             font-size: $font-size-sm;
+         }
+
+         button {
+             padding: 8px 16px;
+             background: $text-primary;
+             color: white;
+             border: none;
+             border-radius: 6px;
+             cursor: pointer;
+             font-weight: 600;
+             opacity: 1;
+             transition: opacity 0.2s;
+
+             &:hover {
+                 opacity: 0.9;
+             }
+         }
+     }
+
+     .result {
+         margin-top: $spacing-md;
+         padding: $spacing-sm;
+         border-radius: 6px;
+         font-size: $font-size-sm;
+         display: flex;
+         align-items: center;
+         gap: $spacing-sm;
+
+         &.success {
+             background: #ECFDF5; // Light green
+             color: #047857; // Dark green
+             border: 1px solid #D1FAE5;
+         }
+
+         &.error {
+             background: #FEF2F2; // Light red
+             color: #B91C1C; // Dark red
+             border: 1px solid #FEE2E2;
+         }
+     }
+ }

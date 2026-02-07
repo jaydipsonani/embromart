@@ -1,0 +1,119 @@
+ @import '../../styles/variables';
+
+ .container {
+     max-width: $container-max-width;
+     margin: 0 auto;
+     padding: $spacing-xl $spacing-lg;
+
+     h1 {
+         margin-bottom: $spacing-xl;
+         font-size: $font-size-2xl;
+     }
+ }
+
+ .grid {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: $spacing-2xl;
+
+     @media (max-width: 768px) {
+         grid-template-columns: 1fr;
+         gap: $spacing-lg;
+     }
+ }
+
+ .summary {
+     background: #F9FAFB;
+     padding: $spacing-lg;
+     border-radius: 12px;
+
+     h2 {
+         font-size: $font-size-lg;
+         margin-bottom: $spacing-lg;
+         border-bottom: 1px solid $border-color;
+         padding-bottom: $spacing-sm;
+     }
+
+     .item {
+         display: flex;
+         gap: $spacing-md;
+         margin-bottom: $spacing-lg;
+
+         img {
+             width: 64px;
+             height: 64px;
+             border-radius: 8px;
+             object-fit: cover;
+         }
+
+         h4 {
+             font-size: $font-size-base;
+             margin-bottom: 4px;
+         }
+
+         p {
+             font-size: $font-size-sm;
+             color: $text-secondary;
+         }
+
+         .price {
+             margin-left: auto;
+             font-weight: 600;
+             color: $primary-color;
+         }
+     }
+
+     .total {
+         @include flex-between;
+         font-size: $font-size-xl;
+         font-weight: 700;
+         color: $text-primary;
+         border-top: 1px solid $border-color;
+         padding-top: $spacing-md;
+     }
+ }
+
+ .payment {
+     h2 {
+         font-size: $font-size-lg;
+         margin-bottom: $spacing-lg;
+     }
+
+     form {
+         display: flex;
+         flex-direction: column;
+         gap: $spacing-md;
+     }
+
+     .row {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: $spacing-md;
+     }
+
+     .group {
+         display: flex;
+         flex-direction: column;
+         gap: $spacing-xs;
+
+         label {
+             font-weight: 600;
+             font-size: $font-size-sm;
+             color: $text-secondary;
+         }
+
+         input {
+             padding: 12px;
+             border: 1px solid $border-color;
+             border-radius: 6px;
+             background: #F3F4F6; // Disabled look
+         }
+     }
+
+     .note {
+         font-size: 12px;
+         color: $text-secondary;
+         text-align: center;
+         margin-top: $spacing-sm;
+     }
+ }
