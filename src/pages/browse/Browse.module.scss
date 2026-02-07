@@ -6,6 +6,15 @@
      margin: 0 auto;
      padding: 0 $spacing-lg $spacing-xl;
      gap: $spacing-xl;
+
+     @media (max-width: 768px) {
+         padding: 0 $spacing-md $spacing-lg;
+         gap: $spacing-md;
+     }
+
+     @media (max-width: 480px) {
+         padding: 0 $spacing-sm $spacing-md;
+     }
  }
 
  .mainContent {
@@ -15,15 +24,38 @@
  .header {
      margin: $spacing-lg 0 $spacing-xl;
      @include flex-between;
+     flex-wrap: wrap;
+     gap: $spacing-md;
+
+     @media (max-width: 768px) {
+         margin: $spacing-md 0 $spacing-lg;
+     }
+
+     @media (max-width: 480px) {
+         flex-direction: column;
+         align-items: flex-start;
+     }
 
      h1 {
          font-size: $font-size-xl;
          color: $text-primary;
+
+         @media (max-width: 768px) {
+             font-size: $font-size-lg;
+         }
+
+         @media (max-width: 480px) {
+             font-size: $font-size-base;
+         }
      }
 
      p {
          color: $text-secondary;
          margin-top: $spacing-xs;
+
+         @media (max-width: 480px) {
+             font-size: $font-size-sm;
+         }
      }
  }
 
@@ -31,4 +63,13 @@
      display: grid;
      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
      gap: $spacing-lg;
+
+     @media (max-width: 768px) {
+         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+         gap: $spacing-md;
+     }
+
+     @media (max-width: 480px) {
+         grid-template-columns: 1fr;
+     }
  }

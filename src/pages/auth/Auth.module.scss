@@ -7,6 +7,15 @@
     justify-content: center;
     padding: $spacing-xl $spacing-md;
     background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); // Subtle texture
+
+    @media (max-width: 768px) {
+        padding: $spacing-lg $spacing-sm;
+        min-height: calc(100vh - 120px);
+    }
+
+    @media (max-width: 480px) {
+        padding: $spacing-md $spacing-xs;
+    }
 }
 
 .authCard {
@@ -18,12 +27,29 @@
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba($border-color, 0.5);
 
+    @media (max-width: 768px) {
+        padding: $spacing-xl $spacing-lg;
+    }
+
+    @media (max-width: 480px) {
+        padding: $spacing-lg $spacing-md;
+        border-radius: 12px;
+    }
+
     h1 {
         font-size: 28px;
         font-weight: 800;
         color: $text-primary;
         margin-bottom: $spacing-sm;
         text-align: center;
+
+        @media (max-width: 768px) {
+            font-size: 24px;
+        }
+
+        @media (max-width: 480px) {
+            font-size: 20px;
+        }
     }
 
     .subtitle {

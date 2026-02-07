@@ -1,0 +1,199 @@
+@import '../../styles/variables';
+
+.container {
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: $spacing-2xl $spacing-lg;
+
+    @media (max-width: 768px) {
+        padding: $spacing-lg $spacing-md;
+    }
+
+    @media (max-width: 480px) {
+        padding: $spacing-md $spacing-sm;
+    }
+}
+
+.header {
+    text-align: center;
+    margin-bottom: $spacing-2xl;
+
+    @media (max-width: 768px) {
+        margin-bottom: $spacing-xl;
+    }
+
+    @media (max-width: 480px) {
+        margin-bottom: $spacing-lg;
+    }
+
+    h1 {
+        font-size: $font-size-2xl;
+        color: $text-primary;
+        margin-bottom: $spacing-sm;
+
+        @media (max-width: 768px) {
+            font-size: $font-size-xl;
+        }
+
+        @media (max-width: 480px) {
+            font-size: $font-size-lg;
+        }
+    }
+
+    p {
+        color: $text-secondary;
+        font-size: $font-size-lg;
+
+        @media (max-width: 480px) {
+            font-size: $font-size-base;
+        }
+    }
+}
+
+.emptyState {
+    text-align: center;
+    padding: $spacing-2xl 0;
+    max-width: 500px;
+    margin: 0 auto;
+
+    @media (max-width: 480px) {
+        padding: $spacing-xl 0;
+    }
+
+    .emptyIcon {
+        font-size: 64px;
+        margin-bottom: $spacing-lg;
+
+        @media (max-width: 480px) {
+            font-size: 48px;
+            margin-bottom: $spacing-md;
+        }
+    }
+
+    h1 {
+        font-size: $font-size-2xl;
+        color: $text-primary;
+        margin-bottom: $spacing-md;
+
+        @media (max-width: 768px) {
+            font-size: $font-size-xl;
+        }
+
+        @media (max-width: 480px) {
+            font-size: $font-size-lg;
+        }
+    }
+
+    p {
+        color: $text-secondary;
+        margin-bottom: $spacing-xl;
+        line-height: 1.6;
+
+        @media (max-width: 480px) {
+            font-size: $font-size-sm;
+            margin-bottom: $spacing-lg;
+        }
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: $spacing-xl;
+
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: $spacing-lg;
+    }
+
+    @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+        gap: $spacing-md;
+    }
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid $border-color;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .imageContainer {
+        width: 100%;
+        aspect-ratio: 1;
+        overflow: hidden;
+        background: #f3f4f6;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        &:hover img {
+            transform: scale(1.05);
+        }
+    }
+
+    .content {
+        padding: $spacing-lg;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-sm;
+        flex: 1;
+
+        h3 {
+            font-size: $font-size-lg;
+            font-weight: 600;
+            color: $text-primary;
+            margin-bottom: $spacing-xs;
+        }
+
+        .meta {
+            display: flex;
+            align-items: center;
+            gap: $spacing-xs;
+            font-size: $font-size-sm;
+            color: $text-secondary;
+            margin-bottom: $spacing-sm;
+        }
+
+        .formats {
+            font-size: $font-size-sm;
+            color: $text-secondary;
+            margin-bottom: $spacing-md;
+            padding: $spacing-sm;
+            background: rgba($primary-color, 0.05);
+            border-radius: 6px;
+        }
+
+        .actions {
+            display: flex;
+            gap: $spacing-sm;
+            margin-top: auto;
+            flex-wrap: wrap;
+
+            @media (max-width: 480px) {
+                flex-direction: column;
+            }
+
+            button {
+                flex: 1;
+
+                @media (max-width: 480px) {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+

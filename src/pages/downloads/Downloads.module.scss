@@ -25,16 +25,16 @@
      }
  }
 
- .downloadCard {
-     background: white;
-     border: 1px solid $border-color;
-     border-radius: 12px;
-     padding: $spacing-lg;
-     display: flex;
-     align-items: center;
-     gap: $spacing-lg;
-     text-align: left;
-     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+.downloadCard {
+    background: white;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: $spacing-lg;
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 
      img {
          width: 100px;

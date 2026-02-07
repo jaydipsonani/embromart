@@ -5,9 +5,26 @@
      margin: 0 auto;
      padding: $spacing-xl $spacing-lg;
 
+     @media (max-width: 768px) {
+         padding: $spacing-lg $spacing-md;
+     }
+
+     @media (max-width: 480px) {
+         padding: $spacing-md $spacing-sm;
+     }
+
      h1 {
          margin-bottom: $spacing-xl;
          font-size: $font-size-2xl;
+
+         @media (max-width: 768px) {
+             font-size: $font-size-xl;
+             margin-bottom: $spacing-lg;
+         }
+
+         @media (max-width: 480px) {
+             font-size: $font-size-lg;
+         }
      }
  }
 
@@ -23,15 +40,23 @@
  }
 
  .summary {
-     background: #F9FAFB;
+     background: white;
      padding: $spacing-lg;
      border-radius: 12px;
+
+     @media (max-width: 480px) {
+         padding: $spacing-md;
+     }
 
      h2 {
          font-size: $font-size-lg;
          margin-bottom: $spacing-lg;
          border-bottom: 1px solid $border-color;
          padding-bottom: $spacing-sm;
+
+         @media (max-width: 480px) {
+             font-size: $font-size-base;
+         }
      }
 
      .item {
@@ -39,16 +64,31 @@
          gap: $spacing-md;
          margin-bottom: $spacing-lg;
 
+         @media (max-width: 480px) {
+             flex-wrap: wrap;
+             gap: $spacing-sm;
+         }
+
          img {
              width: 64px;
              height: 64px;
              border-radius: 8px;
              object-fit: cover;
+             flex-shrink: 0;
+
+             @media (max-width: 480px) {
+                 width: 48px;
+                 height: 48px;
+             }
          }
 
          h4 {
              font-size: $font-size-base;
              margin-bottom: 4px;
+
+             @media (max-width: 480px) {
+                 font-size: $font-size-sm;
+             }
          }
 
          p {
@@ -60,6 +100,11 @@
              margin-left: auto;
              font-weight: 600;
              color: $primary-color;
+
+             @media (max-width: 480px) {
+                 margin-left: 0;
+                 width: 100%;
+             }
          }
      }
 
@@ -89,6 +134,36 @@
          display: grid;
          grid-template-columns: 1fr 1fr;
          gap: $spacing-md;
+
+         @media (max-width: 480px) {
+             grid-template-columns: 1fr;
+         }
+     }
+
+     .paymentMethod {
+         padding: $spacing-lg;
+         text-align: center;
+     }
+
+     .paymentInfo {
+         color: $text-secondary;
+         margin-bottom: $spacing-md;
+     }
+
+     .paymentMethodBadge {
+         display: flex;
+         align-items: center;
+         gap: $spacing-sm;
+         padding: $spacing-md;
+         background: rgba($primary-color, 0.1);
+         border-radius: 8px;
+         margin-bottom: $spacing-lg;
+         font-weight: 600;
+         color: $primary-color;
+
+         span:first-child {
+             font-size: 20px;
+         }
      }
 
      .group {
@@ -106,7 +181,14 @@
              padding: 12px;
              border: 1px solid $border-color;
              border-radius: 6px;
-             background: #F3F4F6; // Disabled look
+             background: $surface-color;
+             transition: border-color 0.2s;
+
+             &:focus {
+                 outline: none;
+                 border-color: $primary-color;
+                 box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+             }
          }
      }
 

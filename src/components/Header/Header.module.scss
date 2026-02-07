@@ -4,7 +4,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background-color: rgba(255, 255, 255, 0.9); // Fallback
+    background-color: rgba(253, 251, 247, 0.95); // Fallback using background-color
     background-image: url('https://www.transparenttextures.com/patterns/linen.png'); // Subtle linen texture
     backdrop-filter: blur(10px);
     border-bottom: 1px solid $border-color;
@@ -15,6 +15,62 @@
         margin: 0 auto;
         padding: $spacing-md $spacing-lg;
         @include flex-between;
+
+        @media (max-width: 768px) {
+            padding: $spacing-md $spacing-md;
+        }
+    }
+
+    .leftSection {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+    }
+
+    .mobileMenuButton {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: $spacing-xs;
+        z-index: 101;
+
+        @media (max-width: 768px) {
+            display: block;
+        }
+    }
+
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 24px;
+        height: 18px;
+        position: relative;
+
+        span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: $text-primary;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+
+            &.active {
+                &:nth-child(1) {
+                    transform: rotate(45deg) translate(6px, 6px);
+                }
+
+                &:nth-child(2) {
+                    opacity: 0;
+                }
+
+                &:nth-child(3) {
+                    transform: rotate(-45deg) translate(6px, -6px);
+                }
+            }
+        }
     }
 
     .logo {
@@ -39,12 +95,28 @@
         a {
             font-weight: 500;
             color: $text-secondary;
-            transition: color 0.2s ease;
+            transition: color 0.2s ease, font-weight 0.2s ease;
             font-size: $font-size-sm;
+            position: relative;
 
-            &:hover,
+            &:hover {
+                color: $primary-color;
+            }
+
             &.active {
                 color: $primary-color;
+                font-weight: 600;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -8px;
+                    left: 0;
+                    right: 0;
+                    height: 2px;
+                    background-color: $primary-color;
+                    border-radius: 2px;
+                }
             }
         }
 
@@ -57,6 +129,12 @@
         display: flex;
         gap: $spacing-md;
         align-items: center;
+
+        @media (max-width: 768px) {
+            .userMenu {
+                display: none;
+            }
+        }
 
         .cart {
             position: relative;
@@ -88,6 +166,10 @@
                 font-size: $font-size-sm;
                 font-weight: 600;
                 color: $text-primary;
+
+                @media (max-width: 480px) {
+                    display: none;
+                }
             }
 
             .logoutBtn {
@@ -103,5 +185,126 @@
                 }
             }
         }
+    }
+}
+
+// Mobile Sidebar
+.mobileSidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+
+    &.open {
+        transform: translateX(0);
+    }
+
+    .sidebarContent {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: $spacing-lg;
+    }
+
+    .sidebarHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: $spacing-xl;
+        padding-bottom: $spacing-md;
+        border-bottom: 1px solid $border-color;
+
+        h2 {
+            font-size: $font-size-xl;
+            color: $text-primary;
+            font-weight: 700;
+        }
+
+        .closeButton {
+            background: none;
+            border: none;
+            font-size: 32px;
+            color: $text-secondary;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            @include flex-center;
+
+            &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+
+    .mobileNav {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-sm;
+        flex: 1;
+
+        a {
+            padding: $spacing-md;
+            font-weight: 500;
+            color: $text-secondary;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+            font-size: $font-size-base;
+
+            &:hover {
+                color: $primary-color;
+                background: rgba($primary-color, 0.05);
+            }
+
+            &.active {
+                color: $primary-color;
+                font-weight: 600;
+                background: rgba($primary-color, 0.1);
+            }
+        }
+    }
+
+    .sidebarFooter {
+        padding-top: $spacing-lg;
+        border-top: 1px solid $border-color;
+
+        .mobileUserMenu {
+            display: flex;
+            flex-direction: column;
+            gap: $spacing-md;
+
+            .mobileUserName {
+                font-size: $font-size-base;
+                font-weight: 600;
+                color: $text-primary;
+                text-align: center;
+            }
+        }
+    }
+}
+
+// Overlay
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
     }
 }

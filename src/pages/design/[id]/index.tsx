@@ -45,7 +45,7 @@ export default function DesignDetail() {
 
                     <CompatibilityChecker supportedFormats={design.formats} />
 
-                    <Button size="large" onClick={() => alert('Proceeding to secure checkout...')}>
+                    <Button size="large" onClick={() => router.push(`/checkout?id=${design.id}`)}>
                         Buy Now - ₹{design.price.toFixed(2)}
                     </Button>
                 </div>

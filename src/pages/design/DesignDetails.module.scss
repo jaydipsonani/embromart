@@ -11,6 +11,13 @@
      @media (max-width: 768px) {
          grid-template-columns: 1fr;
          gap: $spacing-lg;
+         padding: 0 $spacing-md;
+         margin: $spacing-lg auto;
+     }
+
+     @media (max-width: 480px) {
+         padding: 0 $spacing-sm;
+         margin: $spacing-md auto;
      }
  }
 
@@ -40,12 +47,28 @@
          font-size: $font-size-2xl;
          color: $text-primary;
          line-height: 1.2;
+
+         @media (max-width: 768px) {
+             font-size: $font-size-xl;
+         }
+
+         @media (max-width: 480px) {
+             font-size: $font-size-lg;
+         }
      }
 
      .price {
          font-size: $font-size-2xl;
          font-weight: 700;
          color: $primary-color;
+
+         @media (max-width: 768px) {
+             font-size: $font-size-xl;
+         }
+
+         @media (max-width: 480px) {
+             font-size: $font-size-lg;
+         }
      }
 
      .meta {
@@ -55,6 +78,12 @@
          color: $text-secondary;
          border-bottom: 1px solid $border-color;
          padding-bottom: $spacing-md;
+         flex-wrap: wrap;
+
+         @media (max-width: 480px) {
+             gap: $spacing-sm;
+             font-size: $font-size-xs;
+         }
      }
 
      .description {
@@ -70,8 +99,17 @@
          padding: $spacing-md;
          border-radius: 8px;
 
+         @media (max-width: 480px) {
+             grid-template-columns: 1fr;
+             padding: $spacing-sm;
+         }
+
          div {
              font-size: $font-size-sm;
+
+             @media (max-width: 480px) {
+                 font-size: $font-size-xs;
+             }
 
              strong {
                  display: block;

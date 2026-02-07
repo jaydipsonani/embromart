@@ -51,6 +51,16 @@
     &.large {
         padding: $spacing-md $spacing-xl;
         font-size: $font-size-lg;
+
+        @media (max-width: 480px) {
+            padding: $spacing-sm $spacing-lg;
+            font-size: $font-size-base;
+        }
+    }
+
+    @media (max-width: 480px) {
+        font-size: $font-size-sm;
+        padding: $spacing-xs $spacing-md;
     }
 
     &:disabled {

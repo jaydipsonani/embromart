@@ -16,7 +16,7 @@ export default function Home() {
           <p>Explore thousands of high-quality designs, verified for compatibility with Brother, Janome, Bernina and more.</p>
           <div className={styles.buttons}>
             <Link href="/browse"><Button variant="primary" size="large">Browse Collection</Button></Link>
-            <Link href="/contact"><Button variant="secondary" size="large">Custom Orders</Button></Link>
+            <Link href="/contact"><Button variant="primary" size="large">Custom Orders</Button></Link>
           </div>
         </div>
       </div>
