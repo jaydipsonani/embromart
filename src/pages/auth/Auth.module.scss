@@ -104,4 +104,64 @@
         width: 100%;
         justify-content: center;
     }
+
+    .googleButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        padding: 12px;
+        background-color: white;
+        border: 1px solid #DADCE0;
+        border-radius: 4px; // Standard Google border radius
+        font-family: 'Roboto', sans-serif; // Google standard font usually
+        font-size: 16px;
+        font-weight: 500;
+        color: #3c4043;
+        cursor: pointer;
+        transition: background-color 0.2s, box-shadow 0.2s;
+        margin-bottom: $spacing-lg;
+
+        &:hover {
+            background-color: #F8FAFF;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            border-color: #D2E3FC;
+        }
+
+        &:active {
+            background-color: #F1F3F4;
+        }
+
+        img {
+            width: 24px;
+            height: 24px;
+            display: block;
+        }
+    }
+
+    .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: $spacing-lg 0;
+        color: $text-secondary;
+        font-size: $font-size-sm;
+        width: 100%;
+
+        &::before,
+        &::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid $border-color;
+        }
+
+        &::before {
+            margin-right: 1em;
+        }
+
+        &::after {
+            margin-left: 1em;
+        }
+    }
 }

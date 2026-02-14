@@ -1,56 +1,117 @@
- @import '../../styles/variables';
+@import '../../styles/variables';
 
- .footer {
-     background-color: #1F2937; // Dark footer
-     color: $surface-color;
-     padding: $spacing-xl 0 $spacing-md;
-     margin-top: auto;
+.footer {
+    background-color: #1F2937; // Dark footer
+    color: $surface-color;
+    margin-top: auto;
 
-     .container {
-         max-width: $container-max-width;
-         margin: 0 auto;
-         padding: 0 $spacing-lg;
-         display: grid;
-         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-         gap: $spacing-xl;
-     }
+    .newsletter {
+        background-color: $primary-color;
+        padding: $spacing-xl 0;
+        text-align: center;
+        color: white;
 
-     .column {
-         display: flex;
-         flex-direction: column;
-         gap: $spacing-md;
+        .newsletterContent {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 $spacing-md;
+        }
 
-         h3 {
-             font-size: $font-size-lg;
-             color: $primary-color;
-             font-weight: 700;
-             margin-bottom: $spacing-sm;
-         }
+        h3 {
+            font-size: $font-size-xl;
+            margin-bottom: $spacing-sm;
+        }
 
-         p {
-             color: $text-secondary;
-             line-height: 1.6;
-             font-size: $font-size-sm;
-             // Make text lighter for dark background
-             color: #9CA3AF;
-         }
+        p {
+            margin-bottom: $spacing-lg;
+            opacity: 0.9;
+        }
 
-         a {
-             transition: color 0.2s;
-             color: #D1D5DB;
+        .form {
+            display: flex;
+            justify-content: center;
+            gap: $spacing-md;
+            flex-wrap: wrap;
 
-             &:hover {
-                 color: $primary-color;
-             }
-         }
-     }
+            input {
+                padding: $spacing-md;
+                border: none;
+                // border-radius: $border-radius-sm;
+                min-width: 300px;
+                font-family: inherit;
+                outline: none;
+            }
 
-     .bottom {
-         border-top: 1px solid rgba(255, 255, 255, 0.1);
-         margin-top: $spacing-xl;
-         padding-top: $spacing-md;
-         text-align: center;
-         color: #6B7280;
-         font-size: $font-size-sm;
-     }
- }
+            button {
+                padding: $spacing-md $spacing-xl;
+                background-color: #1F2937;
+                color: white;
+                border: none;
+                // border-radius: $border-radius-sm;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background-color 0.2s;
+
+                &:hover {
+                    background-color: black;
+                }
+            }
+        }
+    }
+
+    .container {
+        max-width: $container-max-width;
+        margin: 0 auto;
+        padding: $spacing-xl $spacing-lg;
+    }
+
+    .linksGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: $spacing-xl;
+    }
+
+    .column {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-md;
+
+        h3 {
+            font-size: $font-size-lg;
+            color: white;
+            font-weight: 700;
+            margin-bottom: $spacing-sm;
+        }
+
+        p {
+            color: $text-secondary;
+            line-height: 1.6;
+            font-size: $font-size-sm;
+            color: #9CA3AF;
+        }
+
+        a {
+            transition: color 0.2s;
+            color: #D1D5DB;
+            text-decoration: none;
+
+            &:hover {
+                color: $primary-color;
+            }
+        }
+
+        .social {
+            display: flex;
+            gap: $spacing-md;
+        }
+    }
+
+    .bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: $spacing-lg 0;
+        text-align: center;
+        color: #6B7280;
+        font-size: $font-size-sm;
+        background-color: darken(#1F2937, 2%);
+    }
+}

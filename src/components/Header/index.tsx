@@ -4,10 +4,11 @@ import { useRouter } from 'next/router';
 import styles from './Header.module.scss';
 import Button from '../Button';
 import { useAuth } from '../../context/AuthContext';
+import UserMenu from './UserMenu';
 
 export default function Header() {
     const router = useRouter();
-    const { user, logout } = useAuth();
+    const { user } = useAuth();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const isActive = (path: string) => {
@@ -53,7 +54,7 @@ export default function Header() {
             <header className={styles.header}>
                 <div className={styles.container}>
                     <div className={styles.leftSection}>
-                        <button 
+                        <button
                             className={styles.mobileMenuButton}
                             onClick={toggleMobileMenu}
                             aria-label="Toggle menu"
@@ -79,10 +80,7 @@ export default function Header() {
 
                     <div className={styles.actions}>
                         {user ? (
-                            <div className={styles.userMenu}>
-                                <span className={styles.userName}>Hi, {user.name.split(' ')[0]}</span>
-                                <button onClick={logout} className={styles.logoutBtn}>Sign Out</button>
-                            </div>
+                            <UserMenu />
                         ) : (
                             <Link href="/auth/signin">
                                 <Button variant="primary" size="medium">Sign In</Button>
@@ -93,14 +91,14 @@ export default function Header() {
             </header>
 
             {/* Mobile Sidebar */}
-            <div 
+            <div
                 className={`${styles.mobileSidebar} ${isMobileMenuOpen ? styles.open : ''}`}
                 onClick={closeMobileMenu}
             >
                 <div className={styles.sidebarContent} onClick={(e) => e.stopPropagation()}>
                     <div className={styles.sidebarHeader}>
                         <h2>Menu</h2>
-                        <button 
+                        <button
                             className={styles.closeButton}
                             onClick={closeMobileMenu}
                             aria-label="Close menu"
@@ -128,10 +126,7 @@ export default function Header() {
                     <div className={styles.sidebarFooter}>
                         {user ? (
                             <div className={styles.mobileUserMenu}>
-                                <p className={styles.mobileUserName}>Hi, {user.name.split(' ')[0]}</p>
-                                <Button variant="secondary" onClick={() => { logout(); closeMobileMenu(); }} style={{ width: '100%' }}>
-                                    Sign Out
-                                </Button>
+                                <UserMenu />
                             </div>
                         ) : (
                             <Link href="/auth/signin" onClick={closeMobileMenu}>
@@ -146,7 +141,7 @@ export default function Header() {
 
             {/* Overlay */}
             {isMobileMenuOpen && (
-                <div 
+                <div
                     className={styles.overlay}
                     onClick={closeMobileMenu}
                 />

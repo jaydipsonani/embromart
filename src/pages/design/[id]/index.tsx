@@ -4,13 +4,18 @@ import Button from '../../../components/Button';
 import CompatibilityChecker from '../../../components/CompatibilityChecker';
 import { designs } from '../../../data/designs';
 import styles from '../DesignDetails.module.scss';
-import Head from 'next/head';
+import DesignCard from '../../../components/DesignCard';
 
 export default function DesignDetail() {
     const router = useRouter();
     const { id } = router.query;
 
     const design = designs.find(d => d.id === id);
+
+    // Filter related designs: same category, exclude current design, limit to 4
+    const relatedDesigns = designs
+        .filter(d => d.category === design?.category && d.id !== design?.id)
+        .slice(0, 4);
 
     if (!design) {
         return <Layout><div style={{ padding: '50px', textAlign: 'center' }}>Design not found.</div></Layout>;
@@ -50,6 +55,17 @@ export default function DesignDetail() {
                     </Button>
                 </div>
             </div>
+
+            {relatedDesigns.length > 0 && (
+                <div className={styles.relatedSection}>
+                    <h2>Related Designs</h2>
+                    <div className={styles.grid}>
+                        {relatedDesigns.map(d => (
+                            <DesignCard key={d.id} design={d} />
+                        ))}
+                    </div>
+                </div>
+            )}
         </Layout>
     );
 }

@@ -7,7 +7,7 @@ import styles from './Auth.module.scss';
 import Head from 'next/head';
 
 export default function SignIn() {
-    const { login, isLoading } = useAuth();
+    const { login, loginWithGoogle, isLoading } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -24,6 +24,18 @@ export default function SignIn() {
                     <p className={styles.subtitle}>
                         Don't have an account? <Link href="/auth/signup">Sign Up</Link>
                     </p>
+
+                    <button
+                        type="button"
+                        className={styles.googleButton}
+                        onClick={loginWithGoogle}
+                        disabled={isLoading}
+                    >
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
+                        Sign in with Google
+                    </button>
+
+                    <div className={styles.divider}>Or sign in with email</div>
 
                     <form onSubmit={handleSubmit}>
                         <div className={styles.group}>

@@ -93,5 +93,58 @@ export const designs: Design[] = [
         colors: 4,
         category: 'Abstract',
         rating: 4.5
+    },
+    {
+        id: '7',
+        title: 'Spring Rose Garden',
+        price: 329,
+        imageUrl: 'https://cdn.pixabay.com/photo/2018/02/06/14/07/embroidery-3134828_1280.jpg',
+        formats: ['PES', 'DST', 'JEF', 'EXP'],
+        hoopSize: '5x7',
+        description: 'A vibrant collection of spring roses. Adds a classic touch to linens and home decor.',
+        stitchCount: 15600,
+        colors: 10,
+        category: 'Floral',
+        rating: 4.7,
+        isNew: true
+    },
+    {
+        id: '8',
+        title: 'Playful Puppy',
+        price: 359,
+        imageUrl: 'https://cdn.pixabay.com/photo/2016/11/29/13/20/embroidery-1869842_1280.jpg',
+        formats: ['PES', 'XXX', 'VIP'],
+        hoopSize: '4x4',
+        description: 'A cute puppy design that kids will love. Great for t-shirts and backpacks.',
+        stitchCount: 11000,
+        colors: 6,
+        category: 'Kids',
+        rating: 4.9
+    },
+    {
+        id: '9',
+        title: 'Elegant Monogram A',
+        price: 199,
+        imageUrl: 'https://cdn.pixabay.com/photo/2016/06/14/15/38/embroidery-1456686_1280.jpg',
+        formats: ['PES', 'DST', 'EXP'],
+        hoopSize: '4x4',
+        description: 'A sophisticated single letter monogram. Detailed satin stitching.',
+        stitchCount: 4500,
+        colors: 2,
+        category: 'Fonts',
+        rating: 4.6
+    },
+    {
+        id: '10',
+        title: 'Geometric Bear',
+        price: 489,
+        imageUrl: 'https://cdn.pixabay.com/photo/2017/08/30/01/05/star-wars-2695572_1280.jpg',
+        formats: ['DST', 'PES', 'EXP', 'HUS'],
+        hoopSize: '5x7',
+        description: 'Modern geometric bear design. Perfect for woodland themed decor.',
+        stitchCount: 19500,
+        colors: 3,
+        category: 'Animals', // Matches Lion
+        rating: 4.8
     }
 ];
