@@ -6,12 +6,17 @@ import { useToast } from '../../context/ToastContext';
 import styles from './Checkout.module.scss';
 import { designs, Design } from '../../data/designs';
 
+declare global {
+    interface Window {
+        Razorpay: any;
+    }
+}
+
 export default function Checkout() {
     const router = useRouter();
     const { id } = router.query;
     const { addToast } = useToast();
     const [isProcessing, setIsProcessing] = useState(false);
-    const [showPaymentMethod, setShowPaymentMethod] = useState(false);
     const [cartItem, setCartItem] = useState<Design | null>(null);
 
     useEffect(() => {
@@ -27,30 +32,98 @@ export default function Checkout() {
             // Fallback to first design if no id provided
             setCartItem(designs[0]);
         }
+
+        // Load Razorpay script
+        const script = document.createElement('script');
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        script.async = true;
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        }
     }, [id, router, addToast]);
 
-    const handleBuyNow = () => {
-        setShowPaymentMethod(true);
-    };
-
     const handlePayment = async () => {
+        if (!cartItem) return;
         setIsProcessing(true);
-        addToast('Processing payment with Stripe...', 'info');
+        addToast('Initializing Razorpay...', 'info');
 
-        // Simulate Stripe payment processing
-        setTimeout(() => {
-            setIsProcessing(false);
-            addToast('Payment successful! Redirecting to your designs...', 'success');
-            // Store purchased design in localStorage (in real app, this would be handled by backend)
-            if (cartItem) {
-                const purchasedDesigns = JSON.parse(localStorage.getItem('purchasedDesigns') || '[]');
-                if (!purchasedDesigns.find((d: Design) => d.id === cartItem.id)) {
-                    purchasedDesigns.push(cartItem);
-                    localStorage.setItem('purchasedDesigns', JSON.stringify(purchasedDesigns));
-                }
+        try {
+            // 1. Create order on backend
+            const res = await fetch('/api/razorpay', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    amount: cartItem.price,
+                    currency: 'INR',
+                }),
+            });
+
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
             }
-            router.push('/my-designs');
-        }, 2000);
+
+            const order = await res.json();
+
+            // 2. Initialize Razorpay options
+            const options = {
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_1DP5mmOlF5G5ag', // Replace with your key
+                amount: order.amount,
+                currency: order.currency,
+                name: 'EmbroMart',
+                description: `Purchase ${cartItem.title}`,
+                image: '/logo.png', // Add your logo path here
+                order_id: order.id,
+                handler: function (response: any) {
+                    // console.log(response.razorpay_payment_id);
+                    // console.log(response.razorpay_order_id);
+                    // console.log(response.razorpay_signature);
+
+                    setIsProcessing(false);
+                    addToast('Payment successful! Redirecting to your designs...', 'success');
+
+                    // Store purchased design in localStorage
+                    const purchasedDesigns = JSON.parse(localStorage.getItem('purchasedDesigns') || '[]');
+                    if (!purchasedDesigns.find((d: Design) => d.id === cartItem.id)) {
+                        purchasedDesigns.push(cartItem);
+                        localStorage.setItem('purchasedDesigns', JSON.stringify(purchasedDesigns));
+                    }
+                    router.push('/my-designs');
+                },
+                prefill: {
+                    name: 'Embroidery Fan', // You can prefill user data here
+                    email: 'customer@example.com',
+                    contact: '9999999999'
+                },
+                notes: {
+                    address: 'Embroidery Mart Corporate Office'
+                },
+                theme: {
+                    color: '#3399cc'
+                },
+                modal: {
+                    ondismiss: function () {
+                        setIsProcessing(false);
+                        addToast('Payment cancelled', 'info');
+                    }
+                }
+            };
+
+            const rzp1 = new window.Razorpay(options);
+            rzp1.on('payment.failed', function (response: any) {
+                addToast(`Payment failed: ${response.error.description}`, 'error');
+                setIsProcessing(false);
+            });
+            rzp1.open();
+
+        } catch (error) {
+            console.error('Payment Error:', error);
+            addToast('Something went wrong. Please try again.', 'error');
+            setIsProcessing(false);
+        }
     };
 
     if (!cartItem) {
@@ -82,50 +155,26 @@ export default function Checkout() {
 
                     <div className={styles.payment}>
                         <h2>Payment Details</h2>
-                        {!showPaymentMethod ? (
-                            <div className={styles.paymentMethod}>
-                                <p className={styles.paymentInfo}>Click "Buy Now" to proceed with payment</p>
-                                <Button 
-                                    size="large" 
-                                    onClick={handleBuyNow} 
-                                    style={{ width: '100%', marginTop: '16px' }}
-                                >
-                                    Buy Now - ₹{cartItem.price.toFixed(2)}
-                                </Button>
+                        <div className={styles.paymentMethod}>
+                            <p className={styles.paymentInfo}>
+                                Click "Pay Now" to complete your purchase securely with Razorpay.
+                            </p>
+                            <Button
+                                size="large"
+                                onClick={handlePayment}
+                                disabled={isProcessing}
+                                style={{ width: '100%', marginTop: '16px' }}
+                            >
+                                {isProcessing ? 'Processing...' : `Pay Now - ₹${cartItem.price.toFixed(2)}`}
+                            </Button>
+                            <div style={{ marginTop: '1rem', textAlign: 'center', fontSize: '0.8rem', color: '#666' }}>
+                                <p>Secured by Razorpay</p>
                             </div>
-                        ) : (
-                            <form onSubmit={(e) => { e.preventDefault(); handlePayment(); }}>
-                                <div className={styles.paymentMethodBadge}>
-                                    <span>💳</span>
-                                    <span>Stripe Payment</span>
-                                </div>
-                                <div className={styles.group}>
-                                    <label>Card Number</label>
-                                    <input type="text" placeholder="4242 4242 4242 4242" maxLength={19} />
-                                </div>
-                                <div className={styles.row}>
-                                    <div className={styles.group}>
-                                        <label>Expiry</label>
-                                        <input type="text" placeholder="12/25" maxLength={5} />
-                                    </div>
-                                    <div className={styles.group}>
-                                        <label>CVC</label>
-                                        <input type="text" placeholder="123" maxLength={3} />
-                                    </div>
-                                </div>
-                                <div className={styles.group}>
-                                    <label>Cardholder Name</label>
-                                    <input type="text" placeholder="John Doe" />
-                                </div>
-                                <Button type="submit" size="large" disabled={isProcessing} style={{ width: '100%' }}>
-                                    {isProcessing ? 'Processing Payment...' : `Pay ₹${cartItem.price.toFixed(2)}`}
-                                </Button>
-                                <p className={styles.note}>Secure payment powered by Stripe</p>
-                            </form>
-                        )}
+                        </div>
                     </div>
                 </div>
             </div>
         </Layout>
     );
 }
+
