@@ -16,7 +16,7 @@ export default function Home() {
           <h1>Premium Embroidery Designs for Every Machine</h1>
           <p>Explore thousands of high-quality designs, verified for compatibility with Brother, Janome, Bernina and more.</p>
           <div className={styles.buttons}>
-            <Link href="/galary"><Button variant="primary" size="large">Browse Collection</Button></Link>
+            <Link href="/gallery"><Button variant="primary" size="large">Browse Collection</Button></Link>
             <Link href="/contact"><Button variant="primary" size="large">Custom Orders</Button></Link>
           </div>
         </div>
@@ -28,7 +28,7 @@ export default function Home() {
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
             <h2>Featured Designs</h2>
-            <Link href="/galary">View All &rarr;</Link>
+            <Link href="/gallery">View All &rarr;</Link>
           </div>
           <div className={styles.grid}>
             {featuredDesigns.map(design => (

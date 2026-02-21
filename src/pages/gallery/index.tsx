@@ -3,15 +3,16 @@ import Layout from '../../components/Layout';
 import DesignCard from '../../components/DesignCard';
 import FilterSidebar from '../../components/FilterSidebar';
 import { designs } from '../../data/designs';
-import styles from './Browse.module.scss';
+import styles from './Gallery.module.scss';
 import { useRouter } from 'next/router';
 
-export default function Browse() {
+export default function DesignGallery() {
     const router = useRouter();
     const { aiMatch } = router.query;
 
     const [currentPage, setCurrentPage] = useState(1);
     const designsPerPage = 15;
+    const { search } = router.query;
 
     const [filters, setFilters] = useState<{
         files: string[];
@@ -22,6 +23,8 @@ export default function Browse() {
         hoops: [],
         categories: []
     });
+
+    const [sortBy, setSortBy] = useState<string>('featured');
 
     const allFiles = Array.from(new Set(designs.flatMap(d => d.formats)));
     const allHoops = Array.from(new Set(designs.map(d => d.hoopSize)));
@@ -41,13 +44,44 @@ export default function Browse() {
     };
 
     const filteredDesigns = useMemo(() => {
-        return designs.filter(design => {
+        let result = designs.filter(design => {
+            // Category, Hoop, Format Filters
             if (filters.files.length > 0 && !design.formats.some(f => filters.files.includes(f))) return false;
             if (filters.hoops.length > 0 && !filters.hoops.includes(design.hoopSize)) return false;
             if (filters.categories.length > 0 && !filters.categories.includes(design.category)) return false;
+
+            // Search filter
+            if (search) {
+                const query = (search as string).toLowerCase();
+                return design.title.toLowerCase().includes(query) ||
+                    design.category.toLowerCase().includes(query) ||
+                    design.description.toLowerCase().includes(query);
+            }
+
             return true;
         });
-    }, [filters]);
+
+        // Sorting logic
+        switch (sortBy) {
+            case 'price-low':
+                result.sort((a, b) => a.price - b.price);
+                break;
+            case 'price-high':
+                result.sort((a, b) => b.price - a.price);
+                break;
+            case 'rating':
+                result.sort((a, b) => b.rating - a.rating);
+                break;
+            case 'newest':
+                result.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
+                break;
+            default:
+                // 'featured' - could be a custom order or just default
+                break;
+        }
+
+        return result;
+    }, [filters, search, sortBy]);
 
     // Pagination calculations
     const indexOfLastDesign = currentPage * designsPerPage;
@@ -80,16 +114,36 @@ export default function Browse() {
                 <div className={styles.mainContent}>
                     <div className={styles.header}>
                         <div className={styles.titleArea}>
-                            <h1>{aiMatch === 'true' ? 'AI Matched Results' : 'Embroidery Designs'} ({filteredDesigns.length})</h1>
-                            <p>{aiMatch === 'true' ? 'Here are the designs that best match your uploaded image.' : 'Find the perfect design for your next project'}</p>
+                            <h1>
+                                {search ? `Search results for "${search}"` : aiMatch === 'true' ? 'AI Matched Results' : 'Embroidery Designs'}
+                                ({filteredDesigns.length})
+                            </h1>
+                            <p>{search ? 'Find the designs that match your keywords' : aiMatch === 'true' ? 'Here are the designs that best match your uploaded image.' : 'Find the perfect design for your next project'}</p>
                         </div>
-                        <button
-                            className={styles.mobileFilterBtn}
-                            onClick={() => setIsSidebarOpen(true)}
-                        >
-                            <span className={styles.filterIcon}>🔍</span>
-                            Filters
-                        </button>
+                        <div className={styles.controls}>
+                            <div className={styles.sortWrapper}>
+                                <label htmlFor="sort">Sort by:</label>
+                                <select
+                                    id="sort"
+                                    value={sortBy}
+                                    onChange={(e) => setSortBy(e.target.value)}
+                                    className={styles.sortSelect}
+                                >
+                                    <option value="featured">Featured</option>
+                                    <option value="newest">Newest</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="price-high">Price: High to High</option>
+                                    <option value="rating">Top Rated</option>
+                                </select>
+                            </div>
+                            <button
+                                className={styles.mobileFilterBtn}
+                                onClick={() => setIsSidebarOpen(true)}
+                            >
+                                <span className={styles.filterIcon}>🔍</span>
+                                Filters
+                            </button>
+                        </div>
                     </div>
 
                     <div className={styles.grid}>

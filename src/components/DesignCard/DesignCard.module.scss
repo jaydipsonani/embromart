@@ -1,92 +1,104 @@
- @import '../../styles/variables';
+@import '../../styles/variables';
 
- .card {
-     border-radius: 12px;
-     overflow: hidden;
-     background: white;
-     transition: transform 0.2s ease, box-shadow 0.2s ease;
-     border: 1px solid $border-color;
-     cursor: pointer;
-     display: flex;
-     flex-direction: column;
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid $border-color;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
 
-     &:hover {
-         transform: translateY(-4px);
-         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 
-         .imageContainer img {
-             transform: scale(1.05);
-         }
-     }
+        .imageContainer img {
+            transform: scale(1.05);
+        }
+    }
 
-     .imageContainer {
-         width: 100%;
-         aspect-ratio: 1;
-         overflow: hidden;
-         background: #f3f4f6;
-         position: relative;
+    .imageContainer {
+        width: 100%;
+        aspect-ratio: 1;
+        overflow: hidden;
+        background: #f3f4f6;
+        position: relative;
 
-         img {
-             width: 100%;
-             height: 100%;
-             object-fit: cover;
-             transition: transform 0.3s ease;
-         }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
 
-         .badge {
-             position: absolute;
-             top: 8px;
-             left: 8px;
-             background: rgba(255, 255, 255, 0.9);
-             padding: 4px 8px;
-             border-radius: 4px;
-             font-size: 10px;
-             font-weight: 700;
-             text-transform: uppercase;
-             color: $text-secondary;
-         }
-     }
+        .badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: $text-secondary;
+        }
+    }
 
-     .content {
-         padding: $spacing-md;
-         flex: 1;
-         display: flex;
-         flex-direction: column;
-         gap: $spacing-xs;
+    .content {
+        padding: $spacing-md;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
 
-         h3 {
-             font-size: $font-size-base;
-             font-weight: 600;
-             color: $text-primary;
-             margin-bottom: 4px;
-             white-space: nowrap;
-             overflow: hidden;
-             text-overflow: ellipsis;
-         }
+        h3 {
+            font-size: $font-size-base;
+            font-weight: 600;
+            color: $text-primary;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-         .meta {
-             font-size: $font-size-sm;
-             color: $text-secondary;
-             display: flex;
-             align-items: center;
-             gap: 8px;
-         }
+        .meta {
+            font-size: $font-size-sm;
+            color: $text-secondary;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-         .footer {
-             margin-top: auto;
-             padding-top: $spacing-sm;
-             @include flex-between;
+        .footer {
+            margin-top: auto;
+            padding-top: $spacing-sm;
+            @include flex-between;
 
-             .price {
-                 font-size: $font-size-lg;
-                 font-weight: 700;
-                 color: $primary-color;
-             }
+            .price {
+                font-size: $font-size-lg;
+                font-weight: 700;
+                color: $primary-color;
+            }
 
-             .rating {
-                 font-size: 12px;
-                 color: #F59E0B; // Amber for stars
-             }
-         }
-     }
- }
+            .rating {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+
+                .stars {
+                    font-size: 12px;
+                    color: #F59E0B; // Amber for stars
+                }
+
+                .ratingNumber {
+                    font-size: 11px;
+                    font-weight: 600;
+                    color: $text-secondary;
+                }
+            }
+        }
+    }
+}

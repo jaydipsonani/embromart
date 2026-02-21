@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Layout from '../../../components/Layout';
 import Button from '../../../components/Button';
 import CompatibilityChecker from '../../../components/CompatibilityChecker';
+import DesignCard from '../../../components/DesignCard';
 import { designs } from '../../../data/designs';
 import styles from '../DesignDetails.module.scss';
 import { useAuth } from '../../../context/AuthContext';

@@ -26,7 +26,10 @@ export default function DesignCard({ design }: DesignCardProps) {
                 </div>
                 <div className={styles.footer}>
                     <span className={styles.price}>₹{design.price}</span>
-                    <span className={styles.rating}>{'★'.repeat(5)}</span>
+                    <div className={styles.rating}>
+                        <span className={styles.stars}>{'★'.repeat(Math.floor(design.rating))}</span>
+                        <span className={styles.ratingNumber}>{design.rating.toFixed(1)}</span>
+                    </div>
                 </div>
             </div>
         </Link>
