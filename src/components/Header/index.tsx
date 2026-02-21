@@ -72,7 +72,7 @@ export default function Header() {
 
                     <nav className={styles.nav}>
                         <Link href="/" className={isActive('/')}>Home</Link>
-                        <Link href="/browse" className={isActive('/browse')}>Browse Designs</Link>
+                        <Link href="/galary" className={isActive('/galary')}>Browse Designs</Link>
                         <Link href="/my-designs" className={isActive('/my-designs')}>My Designs</Link>
                         <Link href="/blog" className={isActive('/blog')}>Blog</Link>
                         <Link href="/contact" className={isActive('/contact')}>Contact</Link>
@@ -110,7 +110,7 @@ export default function Header() {
                         <Link href="/" className={isActive('/')} onClick={closeMobileMenu}>
                             Home
                         </Link>
-                        <Link href="/browse" className={isActive('/browse')} onClick={closeMobileMenu}>
+                        <Link href="/galary" className={isActive('/galary')} onClick={closeMobileMenu}>
                             Browse Designs
                         </Link>
                         <Link href="/my-designs" className={isActive('/my-designs')} onClick={closeMobileMenu}>

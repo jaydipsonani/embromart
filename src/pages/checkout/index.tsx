@@ -33,7 +33,7 @@ export default function Checkout() {
                 setCartItem(design);
             } else {
                 addToast('Design not found', 'error');
-                router.push('/browse');
+                router.push('/galary');
             }
         } else {
             // Fallback to first design if no id provided
