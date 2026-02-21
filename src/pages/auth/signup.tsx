@@ -4,16 +4,24 @@ import Layout from '../../components/Layout';
 import Button from '../../components/Button';
 import { useAuth } from '../../context/AuthContext';
 import styles from './Auth.module.scss';
+import { useRouter } from 'next/router';
 
 export default function SignUp() {
+    const router = useRouter();
     const { loginWithGoogle, signup, isLoading } = useAuth();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const redirectPath = router.query.redirect as string;
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await signup(name, email, password);
+        await signup(name, email, password, redirectPath);
+    };
+
+    const handleGoogleLogin = async () => {
+        await loginWithGoogle(redirectPath);
     };
 
     return (
@@ -22,12 +30,12 @@ export default function SignUp() {
                 <div className={styles.authCard}>
                     <h1>Create Account</h1>
                     <p className={styles.subtitle}>
-                        Already have an account? <Link href="/auth/signin">Sign In</Link>
+                        Already have an account? <Link href={`/auth/signin${redirectPath ? `?redirect=${redirectPath}` : ''}`}>Sign In</Link>
                     </p>
                     <button
                         type="button"
                         className={styles.googleButton}
-                        onClick={loginWithGoogle}
+                        onClick={handleGoogleLogin}
                         disabled={isLoading}
                     >
                         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />

@@ -13,9 +13,9 @@ interface User {
 
 interface AuthContextType {
     user: User | null;
-    login: (email: string, password: string) => Promise<void>;
-    loginWithGoogle: () => Promise<void>;
-    signup: (name: string, email: string, password: string) => Promise<void>;
+    login: (email: string, password: string, redirectPath?: string) => Promise<void>;
+    loginWithGoogle: (redirectPath?: string) => Promise<void>;
+    signup: (name: string, email: string, password: string, redirectPath?: string) => Promise<void>;
     logout: () => Promise<void>;
     isLoading: boolean;
 }
@@ -54,12 +54,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return () => unsubscribe();
     }, []);
 
-    const loginWithGoogle = async () => {
+    const loginWithGoogle = async (redirectPath?: string) => {
         setIsLoading(true);
         try {
             await signInWithPopup(auth, googleProvider);
             addToast('Successfully signed in with Google!', 'success');
-            router.push('/');
+            router.push(redirectPath || '/');
         } catch (error: any) {
             console.error("Google Sign-In Error", error);
             addToast(`Google Sign-In failed: ${error.message}`, 'error');
@@ -67,7 +67,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
     };
 
-    const login = async (email: string, password: string) => {
+    const login = async (email: string, password: string, redirectPath?: string) => {
         setIsLoading(true);
         // Mock API call for legacy/static login
         setTimeout(() => {
@@ -77,19 +77,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 setUser(mockUser);
                 localStorage.setItem('user', JSON.stringify(mockUser));
                 addToast('Welcome back!', 'success');
-                router.push('/');
+                router.push(redirectPath || '/');
             } else {
                 // For demo purposes, allow login
                 const mockUser = { id: '1', name: 'Embroidery Fan', email, photoURL: undefined };
                 setUser(mockUser);
                 localStorage.setItem('user', JSON.stringify(mockUser));
                 addToast('Successfully signed in!', 'success');
-                router.push('/');
+                router.push(redirectPath || '/');
             }
         }, 1000);
     };
 
-    const signup = async (name: string, email: string, password: string) => {
+    const signup = async (name: string, email: string, password: string, redirectPath?: string) => {
         setIsLoading(true);
         setTimeout(() => {
             setIsLoading(false);
@@ -97,7 +97,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setUser(newUser);
             localStorage.setItem('user', JSON.stringify(newUser));
             addToast('Account created successfully!', 'success');
-            router.push('/');
+            router.push(redirectPath || '/');
         }, 1000);
     };
 

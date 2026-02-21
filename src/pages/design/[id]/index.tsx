@@ -5,11 +5,12 @@ import Button from '../../../components/Button';
 import CompatibilityChecker from '../../../components/CompatibilityChecker';
 import { designs } from '../../../data/designs';
 import styles from '../DesignDetails.module.scss';
-import DesignCard from '../../../components/DesignCard';
+import { useAuth } from '../../../context/AuthContext';
 
 export default function DesignDetail() {
     const router = useRouter();
     const { id } = router.query;
+    const { user } = useAuth();
 
     const design = designs.find(d => d.id === id);
 
@@ -23,6 +24,14 @@ export default function DesignDetail() {
     if (!design) {
         return <Layout><div style={{ padding: '50px', textAlign: 'center' }}>Design not found.</div></Layout>;
     }
+
+    const handleBuyNow = () => {
+        if (!user) {
+            router.push(`/auth/signin?redirect=/design/${design.id}`);
+            return;
+        }
+        router.push(`/checkout?id=${design.id}`);
+    };
 
     return (
         <Layout title={`${design.title} - EmbroMart`}>
@@ -63,7 +72,7 @@ export default function DesignDetail() {
 
                     <CompatibilityChecker supportedFormats={design.formats} />
 
-                    <Button size="large" onClick={() => router.push(`/checkout?id=${design.id}`)}>
+                    <Button size="large" onClick={handleBuyNow}>
                         Buy Now - ₹{design.price.toFixed(2)}
                     </Button>
                 </div>

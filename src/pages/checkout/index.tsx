@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import Button from '../../components/Button';
 import { useToast } from '../../context/ToastContext';
+import { useAuth } from '../../context/AuthContext';
 import styles from './Checkout.module.scss';
 import { designs, Design } from '../../data/designs';
 
@@ -16,10 +17,16 @@ export default function Checkout() {
     const router = useRouter();
     const { id } = router.query;
     const { addToast } = useToast();
+    const { user, isLoading: authLoading } = useAuth();
     const [isProcessing, setIsProcessing] = useState(false);
     const [cartItem, setCartItem] = useState<Design | null>(null);
 
     useEffect(() => {
+        if (!authLoading && !user) {
+            router.push(`/auth/signin?redirect=/checkout${id ? `?id=${id}` : ''}`);
+            return;
+        }
+
         if (id) {
             const design = designs.find(d => d.id === id);
             if (design) {
@@ -70,7 +77,7 @@ export default function Checkout() {
 
             // 2. Initialize Razorpay options
             const options = {
-                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_SIjTblZV8qK9L2', // Replace with your key
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Replace with your key
                 amount: order.amount,
                 currency: order.currency,
                 name: 'EmbroMart',
@@ -126,8 +133,12 @@ export default function Checkout() {
         }
     };
 
-    if (!cartItem) {
+    if (authLoading || (!cartItem && id)) {
         return <Layout title="Checkout - EmbroMart"><div className={styles.container}>Loading...</div></Layout>;
+    }
+
+    if (!cartItem) {
+        return <Layout title="Checkout - EmbroMart"><div className={styles.container}>Design not found.</div></Layout>;
     }
 
     return (

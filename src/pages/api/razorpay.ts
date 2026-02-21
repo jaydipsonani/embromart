@@ -2,8 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import Razorpay from 'razorpay';
 
 const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_SIjTblZV8qK9L2', // Fallback for demo
-    key_secret: process.env.RAZORPAY_KEY_SECRET || '5dJwNYG7Hw808jdeF9UjrULe', // Fallback for demo - REPLACE IN PROD
+    key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Fallback for demo
+    key_secret: process.env.RAZORPAY_KEY_SECRET, // Fallback for demo - REPLACE IN PROD
 });
 
 export default async function handler(
