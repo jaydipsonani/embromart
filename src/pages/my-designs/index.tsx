@@ -22,11 +22,12 @@ export default function MyDesigns() {
     }, []);
 
     const handleDownload = (design: Design) => {
-        // In a real app, this would download the actual files
-        // For now, we'll simulate a download
         const link = document.createElement('a');
         link.href = design.imageUrl;
         link.download = `${design.title.replace(/\s+/g, '-')}.zip`;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -74,14 +75,14 @@ export default function MyDesigns() {
                                     <strong>Formats:</strong> {design.formats.join(', ')}
                                 </div>
                                 <div className={styles.actions}>
-                                    <Button 
+                                    <Button
                                         onClick={() => handleDownload(design)}
                                         variant="primary"
                                         size="medium"
                                     >
                                         Download
                                     </Button>
-                                    <Button 
+                                    <Button
                                         onClick={() => router.push(`/design/${design.id}`)}
                                         variant="secondary"
                                         size="medium"

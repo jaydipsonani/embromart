@@ -70,7 +70,7 @@ export default function Checkout() {
 
             // 2. Initialize Razorpay options
             const options = {
-                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_1DP5mmOlF5G5ag', // Replace with your key
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_SIjTblZV8qK9L2', // Replace with your key
                 amount: order.amount,
                 currency: order.currency,
                 name: 'EmbroMart',
@@ -156,6 +156,19 @@ export default function Checkout() {
                     <div className={styles.payment}>
                         <h2>Payment Details</h2>
                         <div className={styles.paymentMethod}>
+                            <div className={styles.methods}>
+                                <div className={`${styles.method} ${styles.selected}`}>
+                                    <div className={styles.radio}></div>
+                                    <div className={styles.icon}>
+                                        <img src="https://razorpay.com/favicon.png" alt="Razorpay" />
+                                    </div>
+                                    <div className={styles.details}>
+                                        <span>Razorpay</span>
+                                        <span className={styles.badge}>Best Selection</span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <p className={styles.paymentInfo}>
                                 Click "Pay Now" to complete your purchase securely with Razorpay.
                             </p>
