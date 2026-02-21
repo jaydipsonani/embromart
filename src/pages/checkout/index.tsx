@@ -77,7 +77,7 @@ export default function Checkout() {
 
             // 2. Initialize Razorpay options
             const options = {
-                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Replace with your key
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_SIjTblZV8qK9L2', // Replace with your key
                 amount: order.amount,
                 currency: order.currency,
                 name: 'EmbroMart',
