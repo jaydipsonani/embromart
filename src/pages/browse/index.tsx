@@ -10,6 +10,9 @@ export default function Browse() {
     const router = useRouter();
     const { aiMatch } = router.query;
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const designsPerPage = 15;
+
     const [filters, setFilters] = useState<{
         files: string[];
         hoops: string[];
@@ -34,6 +37,7 @@ export default function Browse() {
                 : [...current, value];
             return { ...prev, [type]: next };
         });
+        setCurrentPage(1); // Reset to first page on filter change
     };
 
     const filteredDesigns = useMemo(() => {
@@ -44,6 +48,17 @@ export default function Browse() {
             return true;
         });
     }, [filters]);
+
+    // Pagination calculations
+    const indexOfLastDesign = currentPage * designsPerPage;
+    const indexOfFirstDesign = indexOfLastDesign - designsPerPage;
+    const currentDesigns = filteredDesigns.slice(indexOfFirstDesign, indexOfLastDesign);
+    const totalPages = Math.ceil(filteredDesigns.length / designsPerPage);
+
+    const paginate = (pageNumber: number) => {
+        setCurrentPage(pageNumber);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     return (
         <Layout title="Browse Designs">
@@ -78,13 +93,46 @@ export default function Browse() {
                     </div>
 
                     <div className={styles.grid}>
-                        {filteredDesigns.map(design => (
+                        {currentDesigns.map(design => (
                             <DesignCard key={design.id} design={design} />
                         ))}
-                        {filteredDesigns.length === 0 && (
-                            <p>No designs match your filters.</p>
-                        )}
                     </div>
+
+                    {filteredDesigns.length === 0 && (
+                        <p className={styles.noResults}>No designs match your filters.</p>
+                    )}
+
+                    {totalPages > 1 && (
+                        <div className={styles.pagination}>
+                            <button
+                                onClick={() => paginate(currentPage - 1)}
+                                disabled={currentPage === 1}
+                                className={styles.pageBtn}
+                            >
+                                Previous
+                            </button>
+
+                            <div className={styles.pageNumbers}>
+                                {Array.from({ length: totalPages }, (_, i) => i + 1).map(number => (
+                                    <button
+                                        key={number}
+                                        onClick={() => paginate(number)}
+                                        className={`${styles.pageNumber} ${currentPage === number ? styles.active : ''}`}
+                                    >
+                                        {number}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <button
+                                onClick={() => paginate(currentPage + 1)}
+                                disabled={currentPage === totalPages}
+                                className={styles.pageBtn}
+                            >
+                                Next
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
         </Layout>

@@ -7,7 +7,6 @@
      margin: 0 auto;
      padding: 0 $spacing-lg $spacing-xl;
      gap: $spacing-xl;
-     overflow-x: hidden;
 
      @media (max-width: 768px) {
          padding: 0 $spacing-md $spacing-lg;
@@ -113,5 +112,74 @@
 
      @media (max-width: 480px) {
          grid-template-columns: 1fr;
+     }
+ }
+
+ .noResults {
+     text-align: center;
+     padding: $spacing-2xl;
+     color: $text-secondary;
+     font-size: $font-size-lg;
+ }
+
+ .pagination {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: $spacing-lg;
+     margin-top: $spacing-2xl;
+     padding: $spacing-xl 0;
+
+     @media (max-width: 480px) {
+         gap: $spacing-sm;
+         flex-direction: column;
+     }
+
+     .pageBtn {
+         padding: 10px 20px;
+         border: 1px solid $border-color;
+         background: white;
+         border-radius: 8px;
+         font-weight: 600;
+         cursor: pointer;
+         transition: all 0.2s;
+
+         &:disabled {
+             opacity: 0.5;
+             cursor: not-allowed;
+         }
+
+         &:not(:disabled):hover {
+             border-color: $primary-color;
+             color: $primary-color;
+         }
+     }
+
+     .pageNumbers {
+         display: flex;
+         gap: $spacing-sm;
+
+         .pageNumber {
+             width: 40px;
+             height: 40px;
+             @include flex-center;
+             border: 1px solid $border-color;
+             background: white;
+             border-radius: 8px;
+             font-weight: 600;
+             cursor: pointer;
+             transition: all 0.2s;
+
+             &.active {
+                 background: $primary-color;
+                 color: white;
+                 border-color: $primary-color;
+             }
+
+             &:hover:not(.active) {
+                 border-color: $primary-color;
+                 color: $primary-color;
+             }
+         }
      }
  }

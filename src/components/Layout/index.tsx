@@ -27,7 +27,7 @@ export default function Layout({
             </Head>
             <div className={inter.className} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
                 <Header />
-                <main style={{ flex: 1, width: '100%', overflowX: 'hidden' }}>
+                <main style={{ flex: 1, width: '100%', minHeight: 'calc(100vh - 150px)' }}>
                     {children}
                 </main>
                 {!hideFooter && <Footer />}
