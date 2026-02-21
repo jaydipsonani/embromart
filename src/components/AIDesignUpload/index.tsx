@@ -18,7 +18,7 @@ export default function AIDesignUpload() {
         setIsUploading(true);
         // Simulate AI processing
         setTimeout(() => {
-            router.push('/galary?aiMatch=true');
+            router.push('/gallery?aiMatch=true');
         }, 1500);
     };
 

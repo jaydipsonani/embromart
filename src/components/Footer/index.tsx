@@ -29,8 +29,8 @@ export default function Footer() {
 
                     <div className={styles.column}>
                         <h3>Discover</h3>
-                        <Link href="/galary">Browse Designs</Link>
-                        <Link href="/galary?filter=new">New Arrivals</Link>
+                        <Link href="/gallery">Browse Designs</Link>
+                        <Link href="/gallery?filter=new">New Arrivals</Link>
                         <Link href="/blog">Blog & Tips</Link>
                         <Link href="/contact">Contact Support</Link>
                     </div>

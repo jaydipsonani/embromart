@@ -41,7 +41,7 @@ export default function MyDesigns() {
                         <div className={styles.emptyIcon}>📦</div>
                         <h1>No Designs Yet</h1>
                         <p>You haven't purchased any designs yet. Start browsing our collection!</p>
-                        <Button onClick={() => router.push('/galary')} size="large">
+                        <Button onClick={() => router.push('/gallery')} size="large">
                             Browse Designs
                         </Button>
                     </div>
