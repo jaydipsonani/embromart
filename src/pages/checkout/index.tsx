@@ -101,7 +101,7 @@ export default function Checkout() {
                     router.push('/my-designs');
                 },
                 prefill: {
-                    name: 'Embroidery Fan', // You can prefill user data here
+                    name: 'Embroidery Fan', // 
                     email: 'customer@example.com',
                     contact: '9999999999'
                 },
