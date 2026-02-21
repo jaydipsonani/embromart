@@ -17,7 +17,7 @@ export default function SignUp() {
     };
 
     return (
-        <Layout title="Sign Up - EmbroMart">
+        <Layout title="Sign Up - EmbroMart" hideFooter={true}>
             <div className={styles.authContainer}>
                 <div className={styles.authCard}>
                     <h1>Create Account</h1>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../../components/Layout';
 import Button from '../../../components/Button';
@@ -17,6 +18,8 @@ export default function DesignDetail() {
         .filter(d => d.category === design?.category && d.id !== design?.id)
         .slice(0, 4);
 
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
     if (!design) {
         return <Layout><div style={{ padding: '50px', textAlign: 'center' }}>Design not found.</div></Layout>;
     }
@@ -25,10 +28,20 @@ export default function DesignDetail() {
         <Layout title={`${design.title} - EmbroMart`}>
             <div className={styles.detailContainer}>
                 <div className={styles.imageGallery}>
-                    <div className={styles.mainImage}>
+                    <div className={styles.mainImage} onClick={() => setIsLightboxOpen(true)}>
                         <img src={design.imageUrl} alt={design.title} />
+                        <div className={styles.zoomHint}>🔍 Click to zoom</div>
                     </div>
                 </div>
+
+                {isLightboxOpen && (
+                    <div className={styles.lightbox} onClick={() => setIsLightboxOpen(false)}>
+                        <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
+                            <button className={styles.closeBtn} onClick={() => setIsLightboxOpen(false)}>×</button>
+                            <img src={design.imageUrl} alt={design.title} />
+                        </div>
+                    </div>
+                )}
 
                 <div className={styles.info}>
                     <h1>{design.title}</h1>
@@ -56,7 +69,7 @@ export default function DesignDetail() {
                 </div>
             </div>
 
-            {relatedDesigns.length > 0 && (
+            {/* {relatedDesigns.length > 0 && (
                 <div className={styles.relatedSection}>
                     <h2>Related Designs</h2>
                     <div className={styles.grid}>
@@ -65,7 +78,7 @@ export default function DesignDetail() {
                         ))}
                     </div>
                 </div>
-            )}
+            )} */}
         </Layout>
     );
 }

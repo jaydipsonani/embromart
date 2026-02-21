@@ -4,6 +4,7 @@ import DesignCard from '../components/DesignCard';
 import { designs } from '../data/designs';
 import styles from '../styles/Home.module.scss';
 import Button from '../components/Button';
+import AIDesignUpload from '../components/AIDesignUpload';
 
 export default function Home() {
   const featuredDesigns = designs.slice(0, 4);
@@ -20,6 +21,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <AIDesignUpload />
 
       <section className={styles.section}>
         <div className={styles.container}>

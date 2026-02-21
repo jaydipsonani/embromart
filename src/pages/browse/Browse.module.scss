@@ -2,10 +2,12 @@
 
  .browseLayout {
      display: flex;
+     width: 100%;
      max-width: $container-max-width;
      margin: 0 auto;
      padding: 0 $spacing-lg $spacing-xl;
      gap: $spacing-xl;
+     overflow-x: hidden;
 
      @media (max-width: 768px) {
          padding: 0 $spacing-md $spacing-lg;
@@ -15,6 +17,21 @@
      @media (max-width: 480px) {
          padding: 0 $spacing-sm $spacing-md;
      }
+
+     .overlay {
+         position: fixed;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         background: rgba(0, 0, 0, 0.5);
+         z-index: 999;
+         display: none;
+
+         @media (max-width: 768px) {
+             display: block;
+         }
+     }
  }
 
  .mainContent {
@@ -23,17 +40,42 @@
 
  .header {
      margin: $spacing-lg 0 $spacing-xl;
-     @include flex-between;
+     display: flex;
+     justify-content: space-between;
+     align-items: flex-start;
      flex-wrap: wrap;
      gap: $spacing-md;
 
      @media (max-width: 768px) {
          margin: $spacing-md 0 $spacing-lg;
+         align-items: center;
      }
 
-     @media (max-width: 480px) {
-         flex-direction: column;
-         align-items: flex-start;
+     .titleArea {
+         flex: 1;
+     }
+
+     .mobileFilterBtn {
+         display: none;
+         align-items: center;
+         gap: 8px;
+         background: white;
+         border: 1px solid $border-color;
+         padding: 10px 20px;
+         border-radius: 8px;
+         font-weight: 600;
+         color: $text-primary;
+         cursor: pointer;
+         transition: all 0.2s;
+
+         @media (max-width: 768px) {
+             display: flex;
+         }
+
+         &:hover {
+             border-color: $primary-color;
+             color: $primary-color;
+         }
      }
 
      h1 {

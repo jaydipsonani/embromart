@@ -9,9 +9,14 @@ const inter = Inter({ subsets: ['latin'] });
 interface LayoutProps {
     children: ReactNode;
     title?: string;
+    hideFooter?: boolean;
 }
 
-export default function Layout({ children, title = 'EmbroMart - Embroidery Design Marketplace' }: LayoutProps) {
+export default function Layout({
+    children,
+    title = 'EmbroMart - Embroidery Design Marketplace',
+    hideFooter = false
+}: LayoutProps) {
     return (
         <>
             <Head>
@@ -20,12 +25,12 @@ export default function Layout({ children, title = 'EmbroMart - Embroidery Desig
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className={inter.className} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+            <div className={inter.className} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
                 <Header />
-                <main style={{ flex: 1 }}>
+                <main style={{ flex: 1, width: '100%', overflowX: 'hidden' }}>
                     {children}
                 </main>
-                <Footer />
+                {!hideFooter && <Footer />}
             </div>
         </>
     );

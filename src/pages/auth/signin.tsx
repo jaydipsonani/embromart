@@ -17,7 +17,7 @@ export default function SignIn() {
     };
 
     return (
-        <Layout title="Sign In - EmbroMart">
+        <Layout title="Sign In - EmbroMart" hideFooter={true}>
             <div className={styles.authContainer}>
                 <div className={styles.authCard}>
                     <h1>Welcome Back</h1>

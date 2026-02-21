@@ -10,6 +10,8 @@ interface FilterSidebarProps {
         categories: string[];
     };
     onFilterChange: (type: 'files' | 'hoops' | 'categories', value: string) => void;
+    isOpen?: boolean;
+    onClose?: () => void;
 }
 
 export default function FilterSidebar({
@@ -17,10 +19,18 @@ export default function FilterSidebar({
     hoops,
     categories,
     selectedFilters,
-    onFilterChange
+    onFilterChange,
+    isOpen = false,
+    onClose
 }: FilterSidebarProps) {
     return (
-        <aside className={styles.sidebar}>
+        <aside className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
+            <div className={styles.sidebarHeader}>
+                <h3>Filters</h3>
+                <button className={styles.closeButton} onClick={onClose} aria-label="Close filters">
+                    ×
+                </button>
+            </div>
             <div className={styles.section}>
                 <h3>Machine Format</h3>
                 <div className={styles.options}>
